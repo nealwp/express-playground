@@ -17,5 +17,17 @@ describe('math router', () => {
                 .send({input: 0})
                 .expect(200)
         })
+        it('should return 400 status if input fails validation', async () => {
+            await supertest(server)
+                .post('/addfortytwo')
+                .send({input: 'abcdefg'})
+                .expect(400)
+        })
+        it('should return 500 status if an error occures', async () => {
+            await supertest(server)
+                .post('/addfortytwo')
+                .send({input: 'abcdefg'})
+                .expect(500)
+        })
     })
 })
