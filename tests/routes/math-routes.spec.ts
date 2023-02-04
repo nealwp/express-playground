@@ -11,23 +11,21 @@ beforeAll(() => {
 
 describe('math router', () => {
     describe('POST /addfortytwo', () => {
-        it('should return 200 status if request succeeds', async () => {
+        it('should return 200 status and result payload if request succeeds', async () => {
             await supertest(server)
                 .post('/addfortytwo')
                 .send({input: 0})
                 .expect(200)
+                .then(res => {
+                    expect(res.body.result).toBeDefined()
+                    expect(typeof res.body.result).toEqual('number')
+                })
         })
         it('should return 400 status if input fails validation', async () => {
             await supertest(server)
                 .post('/addfortytwo')
                 .send({input: 'abcdefg'})
                 .expect(400)
-        })
-        it('should return 500 status if an error occures', async () => {
-            await supertest(server)
-                .post('/addfortytwo')
-                .send({input: 0})
-                .expect(500)
         })
     })
 })
