@@ -26,7 +26,7 @@ describe('math router', () => {
         it('should return 500 status if an error occures', async () => {
             await supertest(server)
                 .post('/addfortytwo')
-                .send({input: 'abcdefg'})
+                .send({input: 0})
                 .expect(500)
         })
     })
