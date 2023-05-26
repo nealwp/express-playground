@@ -1,9 +1,14 @@
 import { Express } from 'express-serve-static-core'
 import { createServer } from '../../src/server'
 import mathRouter from '../../src/routes/math.routes'
+import { math } from '../../src/controllers/math.controller';
 import supertest from 'supertest';
 
 let server: Express;
+
+jest.mock('../../src/controllers/math.controller', () => {
+    
+})
 
 beforeAll(() => {
     server = createServer(mathRouter)
@@ -24,6 +29,7 @@ describe('math router', () => {
          * controller/function is called with. 
          */
         it('should return 200 status and result payload if request succeeds', async () => {
+            math.addFortyTwo
             await supertest(server)
                 .post('/addfortytwo')
                 .send({input: 0})

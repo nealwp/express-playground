@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { math } from "../controllers/math.controller";
 
 const router = Router()
 
@@ -7,8 +8,8 @@ router.post('/addfortytwo', (req, res, next) => {
     if (typeof input !== 'number'){
         res.status(400).json({error: "'input' must be a number"})
     }
-
-    res.status(200).json({result: 0})
+    const result = math.addFortyTwo(input)
+    res.status(200).json({result})
 })
 
 export default router
